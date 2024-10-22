@@ -6,7 +6,7 @@ plugins {
   	id "org.sonarqube" version "3.4.0.2513"
 	id 'jacoco'
 }
-sourceCompatibility = '1.8'
+
 archivesBaseName = 'app'
 
 repositories {
@@ -19,11 +19,11 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	testImplementation 'org.mockito:mockito-core:3.11.2'  
-	testImplementation 'org.mockito:mockito-inline:3.11.2'  // Required for static mocking
+	testImplementation 'org.mockito:mockito-inline:3.11.2'  
 }
 
 springBoot {
-    mainClassName = 'com.sample.SampleApplication' // Removed ".java"
+    mainClassName = 'com.sample.SampleApplication'
 }
 
 test {
@@ -59,6 +59,6 @@ sonarqube {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(8) // Optional but recommended for ensuring JDK compatibility
+        languageVersion = JavaLanguageVersion.of(8) // Java 8 compatibility using toolchain
     }
 }
