@@ -19,24 +19,26 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	testImplementation 'org.mockito:mockito-core:3.11.2'  
-	testImplementation 'org.mockito:mockito-inline:3.11.2'  
-
+	testImplementation 'org.mockito:mockito-inline:3.11.2'  // Required for static mocking
 }
 
 springBoot {
-    mainClassName = 'com.sample.SampleApplication.java'
+    mainClassName = 'com.sample.SampleApplication' // Removed ".java"
 }
+
 test {
 	useJUnitPlatform()
 }
+
 jacoco {
-    toolVersion = "0.8.7" // Specify JaCoCo version
+    toolVersion = "0.8.7"
 }
+
 jacocoTestReport {
     reports {
-        xml.enabled true // Enable XML report
-        csv.enabled false // Disable CSV report
-        html.enabled true // Enable HTML report
+        xml.enabled true
+        csv.enabled false
+        html.enabled true
     }
 }
 
@@ -45,7 +47,6 @@ sonarqube {
         property "sonar.projectName", "java-gradle"
         property "sonar.projectKey", "DevSecOpsSamples_java-gradle"
         property "sonar.organization", "devsecopssamples"
-        // property "sonar.host.url", "http://127.0.0.1:9000"
         property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.sourceEncoding", "UTF-8"
         property "sonar.exclusions", "**/node_modules/**, **/cdk.out/**"
@@ -53,5 +54,11 @@ sonarqube {
         property "sonar.issue.ignore.multicriteria.e1.ruleKey", "typescript:S1848"
         property "sonar.issue.ignore.multicriteria.e1.resourceKey", "**/*.ts"
         property "sonar.links.ci", "https://github.com/DevSecOpsSamples/java-gradle"
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8) // Optional but recommended for ensuring JDK compatibility
     }
 }
