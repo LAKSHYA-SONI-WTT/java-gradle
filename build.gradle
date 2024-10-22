@@ -4,6 +4,7 @@ plugins {
 	id 'java'
 	id 'base'
   	id "org.sonarqube" version "3.4.0.2513"
+	id 'jacoco'
 }
 sourceCompatibility = '1.8'
 archivesBaseName = 'app'
@@ -24,6 +25,16 @@ springBoot {
 }
 test {
 	useJUnitPlatform()
+}
+jacoco {
+    toolVersion = "0.8.7" // Specify JaCoCo version
+}
+jacocoTestReport {
+    reports {
+        xml.enabled true // Enable XML report
+        csv.enabled false // Disable CSV report
+        html.enabled true // Enable HTML report
+    }
 }
 
 sonarqube {
